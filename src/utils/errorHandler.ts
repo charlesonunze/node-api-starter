@@ -49,6 +49,13 @@ export class ValidationError extends ErrorObject {
 	}
 }
 
+export class InvalidInputError extends ErrorObject {
+	constructor(message: string) {
+		super('INVALID_INPUT_ERROR', 422);
+		this.message = message;
+	}
+}
+
 export const ErrorHandler = (
 	error: ErrorObject,
 	req: Request,
