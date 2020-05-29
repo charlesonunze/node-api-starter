@@ -1,27 +1,22 @@
-import winston, { format, transports } from 'winston';
-const { combine, prettyPrint } = format;
+import { join } from 'path';
+import winston, { format } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
-const logDirectory = 'logs';
-const logFile = 'app.log';
+const { combine, prettyPrint } = format;
 
 export const logger = winston.createLogger({
+	level: 'error',
 	format: combine(prettyPrint()),
 	transports: [
 		new DailyRotateFile({
-			filename: logFile,
-			dirname: logDirectory,
+			filename: join(__dirname, '..logs/error.log'),
+			dirname: 'logs',
 			datePattern: 'DD-MM-YYYY',
 			zippedArchive: true,
 			maxFiles: '14d',
-			maxSize: '20m'
+			maxSize: '20m',
+			level: 'error'
 		})
-	],
-	exceptionHandlers: [
-		new transports.Console({
-			format: format.simple()
-		}),
-		new transports.File({ filename: 'exceptions.log', level: 'error' })
 	]
 });
 
@@ -33,7 +28,8 @@ export const logger = winston.createLogger({
 if (process.env.NODE_ENV !== 'production') {
 	logger.add(
 		new winston.transports.Console({
-			format: format.simple()
+			format: format.simple(),
+			level: 'info'
 		})
 	);
 }
