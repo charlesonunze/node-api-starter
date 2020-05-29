@@ -44,7 +44,7 @@ export class ServerError extends ErrorObject {
 
 export class ValidationError extends ErrorObject {
 	constructor(message: string) {
-		super('AUTH_ERROR', 403);
+		super('VALIDATION_ERROR', 422);
 		this.message = message;
 	}
 }
