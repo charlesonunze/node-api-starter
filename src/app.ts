@@ -3,6 +3,7 @@ import { PORT } from './config';
 import { json } from 'body-parser';
 import { rootRoute } from './routes/rootRoute';
 import { registerRequestLogger } from './utils/http.logger';
+import { logger } from './utils/main.logger';
 
 const app = express();
 
@@ -14,5 +15,5 @@ app.use(rootRoute);
 
 app.listen(PORT, (error) => {
 	if (error) throw new Error(error);
-	console.log(`Speak Lord! 👐, your server is listening on port: ${PORT}`);
+	logger.info(`Speak Lord! 👐, your server is listening on port: ${PORT}`);
 });

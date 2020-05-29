@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
+import { logger } from '../utils/main.logger';
 
 export const sayHello: RequestHandler = async (req, res) => {
-	console.log('got here!!!!');
+	logger.info('got here!!!!');
 	return res.json({ message: 'Hello there 😈' });
 };
