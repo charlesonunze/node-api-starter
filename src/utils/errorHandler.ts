@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from 'express';
 import { logger } from './main.logger';
 
 class ErrorObject extends Error {
-	constructor(public type: string, public statusCode: number) {
+	constructor(public name: string, public statusCode: number) {
 		super();
 	}
 }
