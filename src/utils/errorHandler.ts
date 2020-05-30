@@ -1,5 +1,6 @@
 import { Response, Request, NextFunction } from 'express';
 import { logger } from './main.logger';
+import { sendResponse } from './response';
 
 class ErrorObject extends Error {
 	constructor(public name: string, public statusCode: number) {
@@ -63,10 +64,12 @@ export const ErrorHandler = (
 	next: NextFunction
 ) => {
 	const { statusCode = 500, message } = error;
+
 	logger.error(message, { STACK_TRACE: error, DATE: new Date() });
-	return res.status(statusCode).json({
-		status: 'error',
-		statusCode,
-		message
+
+	return sendResponse({
+		res,
+		message,
+		statusCode
 	});
 };
