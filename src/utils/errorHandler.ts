@@ -56,6 +56,12 @@ export class InvalidInputError extends ErrorObject {
 		this.message = message;
 	}
 }
+export class DatabaseError extends ErrorObject {
+	constructor(message: string) {
+		super('DATABASE_ERROR', 503);
+		this.message = message;
+	}
+}
 
 export const ErrorHandler = (
 	error: ErrorObject,
