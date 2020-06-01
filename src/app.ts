@@ -5,6 +5,7 @@ import { registerRequestLogger } from './utils/http.logger';
 import { logger } from './utils/main.logger';
 import { ErrorHandler } from './utils/errorHandler';
 import { connectDB } from './startup/db';
+import { loadRoutes } from './startup/routes';
 
 const app = express();
 
@@ -13,6 +14,7 @@ registerRequestLogger(app);
 app.use(json());
 
 connectDB();
+loadRoutes(app);
 
 app.use(ErrorHandler);
 
