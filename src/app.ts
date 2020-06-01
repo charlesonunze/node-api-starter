@@ -1,20 +1,16 @@
 import express from 'express';
 import { PORT } from './config';
-import { json } from 'body-parser';
-import { registerRequestLogger } from './utils/http.logger';
 import { logger } from './utils/main.logger';
 import { ErrorHandler } from './utils/errorHandler';
 import { connectDB } from './startup/db';
 import { loadRoutes } from './startup/routes';
+import { loadMiddlewares } from './startup/middlewares';
 
 const app = express();
 
-registerRequestLogger(app);
-
-app.use(json());
-
-connectDB();
+loadMiddlewares(app);
 loadRoutes(app);
+connectDB();
 
 app.use(ErrorHandler);
 
