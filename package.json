@@ -1,20 +1,19 @@
 {
 	"name": "node-api-starter",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "app.js",
 	"scripts": {
 		"tsc": "tsc",
 		"postinstall": "rimraf ./build && npm run tsc",
 		"build": "rimraf ./build && npm run tsc",
-		"dev": "nodemon",
-		"start": "node build/app.js",
+		"watch": "tsc -w",
+		"dev": "nodemon build/index.js",
+		"start": "node build/index.js",
 		"commit": "npx git-cz"
 	},
 	"author": "Charles Onunze <https://github.com/charlesonunze>",
 	"license": "ISC",
 	"devDependencies": {
-		"@commitlint/cli": "^8.3.5",
-		"@commitlint/config-conventional": "^8.3.4",
 		"@types/body-parser": "^1.19.0",
 		"@types/compression": "^1.7.0",
 		"@types/cors": "^2.8.6",
@@ -29,10 +28,8 @@
 		"eslint": "^7.1.0",
 		"eslint-config-prettier": "^6.11.0",
 		"eslint-plugin-prettier": "^3.1.3",
-		"husky": "^4.2.5",
 		"nodemon": "^1.19.1",
 		"prettier": "^2.0.5",
-		"ts-node": "^8.3.0",
 		"typescript": "^3.6.2"
 	},
 	"dependencies": {
@@ -49,10 +46,5 @@
 		"swagger-ui-express": "^4.1.4",
 		"winston": "^3.2.1",
 		"winston-daily-rotate-file": "^4.4.2"
-	},
-	"husky": {
-		"hooks": {
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-		}
 	}
 }
