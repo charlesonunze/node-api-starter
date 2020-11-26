@@ -9,6 +9,7 @@
 		"watch": "tsc -w",
 		"dev": "NODE_ENV=development nodemon build/app.js",
 		"start": "NODE_ENV=production node build/app.js",
+		"test": "NODE_ENV=test mocha --reporter spec",
 		"commit": "npx git-cz"
 	},
 	"author": "Charles Onunze <https://github.com/charlesonunze>",
@@ -39,6 +40,7 @@
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"helmet": "^3.22.0",
+		"joi": "^17.3.0",
 		"mongoose": "^5.9.16",
 		"morgan": "^1.10.0",
 		"rimraf": "^3.0.2",

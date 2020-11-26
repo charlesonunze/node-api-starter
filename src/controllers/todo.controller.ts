@@ -1,7 +1,8 @@
 import TodoService from '../services/todo.service';
 import { sendResponse } from '../utils/response';
 import { RequestHandler } from 'express';
-import { Todo, QueryParams } from '../@types';
+import { QueryParams } from '../@types';
+import { handleValidationError, validateTodoInput } from '../validators';
 
 class TodoController {
 	private todoService: TodoService;
@@ -24,7 +25,7 @@ class TodoController {
 
 		sendResponse({
 			res,
-			message: 'Todos',
+			message: 'List of todos',
 			data: { todos }
 		});
 	};
@@ -35,7 +36,7 @@ class TodoController {
 
 		sendResponse({
 			res,
-			message: 'Todo',
+			message: `Returned todo with id:${todoId}`,
 			data: { todo }
 		});
 	};
@@ -46,36 +47,42 @@ class TodoController {
 
 		return sendResponse({
 			res,
-			message: 'Todo deleted.',
+			message: `Todo with id:${todoId} deleted`,
 			data: { deletedTodo }
 		});
 	};
 
 	createTodo: RequestHandler = async (req, res) => {
-		const { title } = req.body as Todo;
-		const savedTodo = await this.todoService.createTodo({ title });
+		const { error, value } = validateTodoInput(req.body);
+
+		if (error) return handleValidationError(error);
+
+		const todo = await this.todoService.createTodo(value);
 
 		return sendResponse({
 			res,
-			message: 'New todo added.',
-			data: { savedTodo }
+			message: 'New todo added',
+			data: { todo }
 		});
 	};
 
 	editTodo: RequestHandler = async (req, res) => {
-		const id = req.params.id;
-		const { title } = req.body as Todo;
+		const { error, value } = validateTodoInput(req.body);
 
-		const editedTodo = await this.todoService.editAndReturnTodo(
+		if (error) return handleValidationError(error);
+
+		const id = req.params.id;
+
+		const todo = await this.todoService.editAndReturnTodo(
 			{ _id: id },
-			{ $set: { title } },
+			{ $set: value },
 			{ new: true }
 		);
 
 		return sendResponse({
 			res,
-			message: 'Todo edited.',
-			data: { editedTodo }
+			message: `Edited todo with id:${id}`,
+			data: { todo }
 		});
 	};
 }
