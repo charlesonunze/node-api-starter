@@ -7,8 +7,8 @@
 		"postinstall": "rimraf ./build && npm run tsc",
 		"build": "rimraf ./build && npm run tsc",
 		"watch": "tsc -w",
-		"dev": "nodemon build/index.js",
-		"start": "node build/index.js",
+		"dev": "nodemon build/app.js",
+		"start": "node build/app.js",
 		"commit": "npx git-cz"
 	},
 	"author": "Charles Onunze <https://github.com/charlesonunze>",
