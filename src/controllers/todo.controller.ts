@@ -16,12 +16,12 @@ class TodoController {
 		const _pageNo = pageNo ? parseInt(pageNo) : 1;
 		const _size = pageSize ? parseInt(pageSize) : 10;
 
-		const options = {
+		const paginationOptions = {
 			skip: _size * (_pageNo - 1),
 			limit: _size
 		};
 
-		const todos = await this.todoService.getAllTodos({}, options);
+		const todos = await this.todoService.getAllTodos(paginationOptions);
 
 		sendResponse({
 			res,
@@ -32,7 +32,7 @@ class TodoController {
 
 	getOneTodo: RequestHandler = async (req, res) => {
 		const todoId = req.params.id;
-		const todo = await this.todoService.getOneTodo({ _id: todoId });
+		const todo = await this.todoService.getOneTodo(todoId);
 
 		sendResponse({
 			res,
@@ -43,12 +43,12 @@ class TodoController {
 
 	deleteTodo: RequestHandler = async (req, res) => {
 		const todoId = req.params.id;
-		const deletedTodo = await this.todoService.deleteTodo({ _id: todoId });
+		const todo = await this.todoService.deleteTodo(todoId);
 
 		return sendResponse({
 			res,
 			message: `Todo with id:${todoId} deleted`,
-			data: { deletedTodo }
+			data: { todo }
 		});
 	};
 
@@ -71,17 +71,13 @@ class TodoController {
 
 		if (error) return handleValidationError(error);
 
-		const id = req.params.id;
+		const todoId = req.params.id;
 
-		const todo = await this.todoService.editAndReturnTodo(
-			{ _id: id },
-			{ $set: value },
-			{ new: true }
-		);
+		const todo = await this.todoService.editTodo(todoId, value);
 
 		return sendResponse({
 			res,
-			message: `Edited todo with id:${id}`,
+			message: `Edited todo with id:${todoId}`,
 			data: { todo }
 		});
 	};

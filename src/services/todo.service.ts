@@ -12,32 +12,24 @@ class TodoService {
 		return await this.todoRepo.save(todo);
 	}
 
-	async editTodo(findQuery: anyObject, updateQuery: anyObject) {
-		return await this.todoRepo.updateOne(findQuery, updateQuery);
-	}
-
-	async editAndReturnTodo(
-		findQuery: anyObject,
-		updateQuery: anyObject,
-		options: anyObject
-	) {
+	async editTodo(id: string, data: anyObject) {
 		return await this.todoRepo.findOneAndUpdate(
-			findQuery,
-			updateQuery,
-			options
+			{ _id: id },
+			{ $set: data },
+			{ new: true }
 		);
 	}
 
-	async deleteTodo(findQuery: anyObject) {
-		return await this.todoRepo.deleteOne(findQuery);
+	async deleteTodo(id: string) {
+		return await this.todoRepo.deleteOne({ _id: id });
 	}
 
-	async getOneTodo(findQuery: anyObject) {
-		return this.todoRepo.findOne(findQuery);
+	async getOneTodo(id: string) {
+		return this.todoRepo.findOne({ _id: id });
 	}
 
-	async getAllTodos(findQuery: anyObject, options: anyObject) {
-		return this.todoRepo.find(findQuery, options);
+	async getAllTodos(paginationOptions: anyObject) {
+		return this.todoRepo.find({}, paginationOptions);
 	}
 }
 
