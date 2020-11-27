@@ -14,6 +14,10 @@ class BaseRepo {
 		return await this.model.create(data);
 	}
 
+	async insertMany(data: anyObject[]) {
+		return await this.model.insertMany(data);
+	}
+
 	async findById(id: string) {
 		return await this.model.findById(id).lean().exec();
 	}
