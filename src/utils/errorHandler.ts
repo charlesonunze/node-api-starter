@@ -63,7 +63,15 @@ export class DatabaseError extends ErrorObject {
 	}
 }
 
-export const ErrorHandler = (
+export const NotFoundErrorHandler = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	throw new NotFoundError('Page not found');
+};
+
+export const ServerErrorHandler = (
 	error: ErrorObject,
 	req: Request,
 	res: Response,

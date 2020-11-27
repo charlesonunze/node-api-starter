@@ -3,8 +3,14 @@ import { todoRoutes } from '../routes/todo.route';
 import { swaggerRoute } from '../routes/docs.route';
 
 export const loadRoutes = (app: Application) => {
+	// Root Route
+	app.get('/', (req, res) => {
+		res.send('Hi there!');
+	});
+
+	// API Routes
 	app.use('/api', todoRoutes);
 
-	// Swagger Docs Endpoint
+	// Swagger Docs
 	app.use('/api/docs', swaggerRoute);
 };
