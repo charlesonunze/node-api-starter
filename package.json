@@ -9,8 +9,8 @@
 		"watch": "tsc -w",
 		"dev": "NODE_ENV=development nodemon build/app.js",
 		"start": "NODE_ENV=production node build/app.js",
-		"test": "NODE_ENV=test mocha 'tests/**/*.ts' --watch-extensions ts --require ts-node/register",
-		"test:coverage": "NODE_ENV=test nyc --reporter=html --reporter=text mocha 'tests/**/*.ts' --watch-extensions ts --require ts-node/register",
+		"test": "TS_NODE_FILES=true mocha --exit --require ts-node/register --colors tests/**/*.ts",
+    "coverage": "nyc npm run test",
 		"commit": "npx git-cz"
 	},
 	"author": "Charles Onunze <https://github.com/charlesonunze>",
