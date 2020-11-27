@@ -9,7 +9,7 @@ export const loadRoutes = (app: Application) => {
 	});
 
 	// API Routes
-	app.use('/api', todoRoutes);
+	app.use('/api/v1', todoRoutes);
 
 	// Swagger Docs
 	app.use('/api/docs', swaggerRoute);
