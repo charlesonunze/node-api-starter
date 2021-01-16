@@ -56,6 +56,7 @@ export class InvalidInputError extends ErrorObject {
 		this.message = message;
 	}
 }
+
 export class DatabaseError extends ErrorObject {
 	constructor(message: string) {
 		super('DATABASE_ERROR', 503);
@@ -68,7 +69,7 @@ export const NotFoundErrorHandler = (
 	res: Response,
 	next: NextFunction
 ) => {
-	throw new NotFoundError('Page not found');
+	throw new NotFoundError('Resource not found.');
 };
 
 export const ServerErrorHandler = (
