@@ -3,13 +3,13 @@ import { PORT } from './config';
 import { logger } from './utils/main.logger';
 import { connectDB } from './startup/db';
 import { loadRoutes } from './startup/routes';
-import { loadMiddlewares } from './startup/middlewares';
+import { loadMiddleware } from './startup/middleware';
 import { NotFoundErrorHandler, ServerErrorHandler } from './utils/errorHandler';
 
 const app = express();
 
-// Load Middlewares
-loadMiddlewares(app);
+// Load Middleware
+loadMiddleware(app);
 loadRoutes(app);
 connectDB();
 

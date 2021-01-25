@@ -11,7 +11,7 @@ const corsOptions = {
 	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-export const loadMiddlewares = (app: Application) => {
+export const loadMiddleware = (app: Application) => {
 	registerRequestLogger(app);
 	app.use(cors(corsOptions));
 	app.use(compression());
