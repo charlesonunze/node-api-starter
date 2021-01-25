@@ -1,5 +1,5 @@
 import { components } from './components';
-import { getAllTodos } from './todos';
+import { todoDocs } from './todos';
 
 const swaggerDocs = {
 	openapi: '3.0.0',
@@ -17,7 +17,7 @@ const swaggerDocs = {
 	],
 
 	paths: {
-		'/todos': getAllTodos
+		'/todos': todoDocs
 	},
 
 	components: components

@@ -1,4 +1,4 @@
-export const getAllTodos = {
+export const todoDocs = {
 	get: {
 		tags: ['TODOS'],
 		summary: 'Get all todos.',
