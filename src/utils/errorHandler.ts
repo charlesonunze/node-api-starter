@@ -36,13 +36,6 @@ export class NotFoundError extends ErrorObject {
 	}
 }
 
-export class ServerError extends ErrorObject {
-	constructor(message: string) {
-		super('SERVER_ERROR', 500);
-		this.message = message;
-	}
-}
-
 export class ValidationError extends ErrorObject {
 	constructor(message: string) {
 		super('VALIDATION_ERROR', 422);
@@ -50,9 +43,9 @@ export class ValidationError extends ErrorObject {
 	}
 }
 
-export class InvalidInputError extends ErrorObject {
+export class ServerError extends ErrorObject {
 	constructor(message: string) {
-		super('INVALID_INPUT_ERROR', 422);
+		super('SERVER_ERROR', 500);
 		this.message = message;
 	}
 }
