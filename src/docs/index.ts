@@ -4,9 +4,9 @@ import { todoDocs } from './todos';
 const swaggerDocs = {
 	openapi: '3.0.0',
 	info: {
-		version: '1.0.0',
-		title: 'CBT REST API',
-		description: 'Official documentation for CBT REST API.'
+		version: '1.0.3',
+		title: 'TODO REST API',
+		description: 'Official documentation for TODO REST API.'
 	},
 	schemes: [],
 	servers: [
