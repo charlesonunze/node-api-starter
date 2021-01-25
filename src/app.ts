@@ -17,7 +17,7 @@ connectDB();
 app.use(NotFoundErrorHandler);
 app.use(ServerErrorHandler);
 
-export default app.listen(PORT, (error) => {
-	if (error) throw new Error(error);
+export default app.listen(PORT, (e: Error) => {
+	if (e) throw new Error(e.message);
 	logger.info(`Speak Lord! 👐, your server is listening on port: ${PORT}`);
 });
