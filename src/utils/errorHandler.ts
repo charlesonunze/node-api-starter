@@ -36,6 +36,13 @@ export class NotFoundError extends ErrorObject {
 	}
 }
 
+export class DuplicateResourceError extends ErrorObject {
+	constructor(message: string) {
+		super('DUPLICATE_RESOURCE_ERROR', 409);
+		this.message = message;
+	}
+}
+
 export class ValidationError extends ErrorObject {
 	constructor(message: string) {
 		super('VALIDATION_ERROR', 422);
