@@ -18,3 +18,12 @@ export const connectDB = () => {
 			throw new DatabaseError('Something went wrong 😞');
 		});
 };
+
+export const disconnectDB = () => {
+	mongoose.connection
+		.close()
+		.then(() => logger.info(`Disconnected 💃`))
+		.catch(() => {
+			throw new DatabaseError('Something went wrong 😞');
+		});
+};
