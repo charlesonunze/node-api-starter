@@ -14,8 +14,8 @@ export const connectDB = () => {
 	mongoose
 		.connect(DB_URI, options)
 		.then(() => logger.info(`Connected to ${DB_URI} 💃`))
-		.catch(() => {
-			throw new DatabaseError('Something went wrong 😞');
+		.catch((e: Error) => {
+			throw new DatabaseError(e.message);
 		});
 };
 
@@ -23,7 +23,7 @@ export const disconnectDB = () => {
 	mongoose.connection
 		.close()
 		.then(() => logger.info(`Disconnected 💃`))
-		.catch(() => {
-			throw new DatabaseError('Something went wrong 😞');
+		.catch((e: Error) => {
+			throw new DatabaseError(e.message);
 		});
 };
