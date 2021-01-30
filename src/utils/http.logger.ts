@@ -23,7 +23,10 @@ const fileAppender = morgan(requestLogFormat, {
 // function to inject morgan in an express app
 export const registerRequestLogger = (app: Application) => {
 	// log to file only in `production`
-	if (process.env.NODE_ENV === 'production') {
+	if (
+		process.env.NODE_ENV === 'production' ||
+		process.env.NODE_ENV === 'test'
+	) {
 		app.use(fileAppender);
 	} else {
 		app.use(consoleAppender);
