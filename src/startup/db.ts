@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose, { ConnectionOptions } from 'mongoose';
 import { DB_URI } from '../config';
 import { DatabaseError } from '../utils/errorHandler';
 import { logger } from '../utils/main.logger';
 
-const options = {
+const options: ConnectionOptions = {
 	useCreateIndex: true,
 	useNewUrlParser: true,
 	useFindAndModify: false,
