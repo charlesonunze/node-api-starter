@@ -3,18 +3,19 @@ import {
 	Document,
 	UpdateQuery,
 	QueryFindOptions,
-	QueryFindOneAndUpdateOptions
+	QueryFindOneAndUpdateOptions,
+	CreateQuery,
+	FilterQuery
 } from 'mongoose';
-import { anyObject } from '../@types';
 
-class BaseRepo {
-	protected constructor(private model: Model<Document>) {}
+class BaseRepo<T extends Document> {
+	protected constructor(private model: Model<T>) {}
 
-	async save(data: anyObject) {
+	async insertOne(data: CreateQuery<T>) {
 		return await this.model.create(data);
 	}
 
-	async insertMany(data: anyObject[]) {
+	async insertMany(data: T[]) {
 		return await this.model.insertMany(data);
 	}
 
@@ -22,25 +23,25 @@ class BaseRepo {
 		return await this.model.findById(id).lean().exec();
 	}
 
-	async findOne(query: anyObject) {
+	async findOne(query: FilterQuery<T>) {
 		return await this.model.findOne(query).lean().exec();
 	}
 
-	async find(query: anyObject, options: QueryFindOptions) {
+	async find(query: FilterQuery<T>, options: QueryFindOptions) {
 		return await this.model.find(query, null, options).lean().exec();
 	}
 
-	async updateOne(findQuery: anyObject, updateQuery: UpdateQuery<anyObject>) {
+	async updateOne(findQuery: FilterQuery<T>, updateQuery: UpdateQuery<T>) {
 		return this.model.updateOne(findQuery, updateQuery).exec();
 	}
 
-	async updateMany(findQuery: anyObject, updateQuery: UpdateQuery<anyObject>) {
+	async updateMany(findQuery: FilterQuery<T>, updateQuery: UpdateQuery<T>) {
 		return this.model.updateMany(findQuery, updateQuery).exec();
 	}
 
 	async findOneAndUpdate(
-		findQuery: anyObject,
-		updateQuery: UpdateQuery<anyObject>,
+		findQuery: FilterQuery<T>,
+		updateQuery: UpdateQuery<T>,
 		options: QueryFindOneAndUpdateOptions
 	) {
 		return this.model
@@ -49,15 +50,15 @@ class BaseRepo {
 			.exec();
 	}
 
-	async deleteOne(query: anyObject) {
+	async deleteOne(query: FilterQuery<T>) {
 		return await this.model.deleteOne(query).exec();
 	}
 
-	async deleteMany(query: anyObject) {
+	async deleteMany(query: FilterQuery<T>) {
 		return await this.model.deleteMany(query).exec();
 	}
 
-	async findOneAndDelete(query: anyObject) {
+	async findOneAndDelete(query: FilterQuery<T>) {
 		return await this.model.findOneAndDelete(query).exec();
 	}
 

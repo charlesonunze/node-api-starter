@@ -1,7 +1,7 @@
 import BaseRepo from './base.repo';
-import { TodoModel } from '../models/todo.model';
+import { ITodo, TodoModel } from '../models/todo.model';
 
-class TodoRepo extends BaseRepo {
+class TodoRepo extends BaseRepo<ITodo> {
 	constructor() {
 		super(TodoModel);
 	}
